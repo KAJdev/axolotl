@@ -1,0 +1,108 @@
+{
+  "tests": [
+    {
+      "name": "quick_smoke_test_sft",
+      "input": {
+        "user_id": "test-user",
+        "model_id": "tiny-run-sft",
+        "run_id": "sft-quick-1",
+        "credentials": {
+          "wandb_api_key": "",
+          "hf_token": ""
+        },
+        "args": {
+          "base_model": "sshleifer/tiny-gpt2",
+          "load_in_4bit": false,
+          "bf16": false,
+          "gradient_checkpointing": false,
+          "datasets": [
+            {
+              "path": "ybelkada/tiny_shakespeare",
+              "type": "alpaca"
+            }
+          ],
+          "output_dir": "/workspace/out/sft-smoke",
+          "adapter": "lora",
+          "sequence_len": 128,
+          "micro_batch_size": 1,
+          "gradient_accumulation_steps": 1,
+          "num_epochs": 1,
+          "learning_rate": 1e-4,
+          "evals_per_epoch": 1,
+          "saves_per_epoch": 1
+        }
+      },
+      "timeout": 100000
+    },
+    {
+      "name": "quick_test_flash_attention_off",
+      "input": {
+        "user_id": "test-user",
+        "model_id": "tiny-run-noflash",
+        "run_id": "noflash-test",
+        "credentials": {
+          "wandb_api_key": "",
+          "hf_token": ""
+        },
+        "args": {
+          "base_model": "sshleifer/tiny-gpt2",
+          "flash_attention": false,
+          "gradient_checkpointing": false,
+          "datasets": [
+            {
+              "path": "ybelkada/tiny_shakespeare",
+              "type": "alpaca"
+            }
+          ],
+          "output_dir": "/workspace/out/no-flash",
+          "adapter": "lora",
+          "num_epochs": 1,
+          "micro_batch_size": 1
+        }
+      },
+      "timeout": 100000
+    },
+    {
+      "name": "config_only_test",
+      "input": {
+        "user_id": "noop",
+        "model_id": "noop",
+        "run_id": "noop",
+        "credentials": {
+          "wandb_api_key": "",
+          "hf_token": ""
+        },
+        "args": {
+          "base_model": "sshleifer/tiny-gpt2",
+          "output_dir": "/workspace/out/config-test",
+          "adapter": "none"
+        }
+      },
+      "timeout": 100000
+    }
+  ],
+  "config": {
+    "gpuTypeId": "NVIDIA GeForce RTX 4090",
+    "gpuCount": 1,
+    "env": [
+      {
+        "key": "TOKENIZER",
+        "value": ""
+      },
+      {
+        "key": "DISABLE_LOG_STATS",
+        "value": "true"
+      }
+    ],
+    "allowedCudaVersions": [
+      "12.7",
+      "12.6",
+      "12.5",
+      "12.4",
+      "12.3",
+      "12.2",
+      "12.1",
+      "12.0"
+    ]
+  }
+}
