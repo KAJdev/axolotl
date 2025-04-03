@@ -19,13 +19,13 @@
 # # Python dependencies
 FROM axolotlai/axolotl-cloud:main-latest
 
-COPY builder/requirements.txt /requirements.txt
+COPY .runpod/builder/requirements.txt /requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade -r /requirements.txt
 
 # RUN pip install --upgrade torch --index-url https://download.pytorch.org/whl/cu121
-    
+
 # RUN git clone https://github.com/runpod-workers/axolotl.git && \
 #     cd axolotl && \
 #     pip install packaging ninja && \
@@ -42,6 +42,6 @@ ENV TRANSFORMERS_CACHE="${BASE_VOLUME}/huggingface-cache/hub"
 
 
 # Add src files (Worker Template)
-COPY src /src
+COPY .runpod/src /src
 
 CMD ["python3", "/src/handler.py"]
