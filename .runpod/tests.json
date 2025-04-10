@@ -11,13 +11,13 @@
           "hf_token": ""
         },
         "args": {
-          "base_model": "sshleifer/tiny-gpt2",
+          "base_model": "unsloth/tinyllama-bnb-4bit",
           "load_in_4bit": false,
           "bf16": false,
           "gradient_checkpointing": false,
           "datasets": [
             {
-              "path": "ybelkada/tiny_shakespeare",
+              "path": "vicgalle/alpaca-gpt4",
               "type": "alpaca"
             }
           ],
@@ -30,52 +30,6 @@
           "learning_rate": 1e-4,
           "evals_per_epoch": 1,
           "saves_per_epoch": 1
-        }
-      },
-      "timeout": 100000
-    },
-    {
-      "name": "quick_test_flash_attention_off",
-      "input": {
-        "user_id": "test-user",
-        "model_id": "tiny-run-noflash",
-        "run_id": "noflash-test",
-        "credentials": {
-          "wandb_api_key": "",
-          "hf_token": ""
-        },
-        "args": {
-          "base_model": "sshleifer/tiny-gpt2",
-          "flash_attention": false,
-          "gradient_checkpointing": false,
-          "datasets": [
-            {
-              "path": "ybelkada/tiny_shakespeare",
-              "type": "alpaca"
-            }
-          ],
-          "output_dir": "/workspace/out/no-flash",
-          "adapter": "lora",
-          "num_epochs": 1,
-          "micro_batch_size": 1
-        }
-      },
-      "timeout": 100000
-    },
-    {
-      "name": "config_only_test",
-      "input": {
-        "user_id": "noop",
-        "model_id": "noop",
-        "run_id": "noop",
-        "credentials": {
-          "wandb_api_key": "",
-          "hf_token": ""
-        },
-        "args": {
-          "base_model": "sshleifer/tiny-gpt2",
-          "output_dir": "/workspace/out/config-test",
-          "adapter": "none"
         }
       },
       "timeout": 100000
