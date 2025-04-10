@@ -48,7 +48,7 @@ async def handler(job):
     if os.environ.get("HF_TOKEN"):
         login(token=os.environ["HF_TOKEN"])
     else:
-        logger.warning("No HF_TOKEN provided. Skipping login.")
+        logger.info("No HF_TOKEN provided. Skipping login.")
 
     logger.info(f"Starting Training.")
     async for result in train(config_path):  # Pass the config path instead of args
