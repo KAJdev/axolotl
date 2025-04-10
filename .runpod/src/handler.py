@@ -44,7 +44,11 @@ async def handler(job):
         os.environ["HF_TOKEN"] = credentials["hf_token"]
 
     validate_env(logger, runpod_job_id)
-    login(token=os.environ["HF_TOKEN"])
+
+    if os.environ.get("HF_TOKEN"):
+        login(token=os.environ["HF_TOKEN"])
+    else:
+        logger.warning("No HF_TOKEN provided. Skipping login.")
 
     logger.info(f"Starting Training.")
     async for result in train(config_path):  # Pass the config path instead of args
